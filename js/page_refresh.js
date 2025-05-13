@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
       wrapAround: true
     });
 
-    // Ensure Flickity resizes when video loads
+    // Resize Flickity after video metadata is loaded
     const video = carouselElement.querySelector('video');
     if (video) {
       video.addEventListener('loadedmetadata', function () {
@@ -19,18 +19,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Optional: Hook for when the modal opens
-  const openBtn = document.getElementById('open-project-1');
+  // Modal logic for Bulma
   const modal = document.getElementById('project-1-modal');
+  const openBtn = document.getElementById('open-project-1');
+  const closeBtn = modal.querySelector('.delete');
+  const closeFooterBtn = modal.querySelector('.modal-card-foot .button');
 
   if (openBtn && modal) {
     openBtn.addEventListener('click', function () {
-      modal.classList.add('is-active'); // Adjust for your modal system
+      modal.classList.add('is-active');
 
-      // Trigger Flickity layout fix after modal is visible
+      // Trigger Flickity layout fix AFTER modal becomes visible
       setTimeout(() => {
         if (flkty) flkty.resize();
-      }, 300); // Adjust delay to match modal animation duration
+      }, 100); // small delay for visibility
+    });
+  }
+
+  // Close modal with header button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function () {
+      modal.classList.remove('is-active');
+    });
+  }
+
+  // Close modal with footer button
+  if (closeFooterBtn) {
+    closeFooterBtn.addEventListener('click', function () {
+      modal.classList.remove('is-active');
     });
   }
 });
