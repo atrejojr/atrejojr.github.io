@@ -1,14 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700,900);
 
 /*Additional CSS code for spacings*/
-.involvement-label {
-  margin-top: 0.75em;
-  margin-left: 0;
-}
-
 .involvement-list {
-  margin-top: 0.25em;
-  margin-left: 1.25em; /* Ensures bullet points are indented properly */
+  margin-top: 0 !important;
 }
 
 /*! Flickity v2.3.0
