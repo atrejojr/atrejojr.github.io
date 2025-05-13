@@ -7,6 +7,7 @@
   <link rel="icon" href="headshot.jpg" type="image/x-icon">
   <link rel="stylesheet" href="css/main.bundle.css">
   <script src="https://kit.fontawesome.com/4e5a72c756.js"></script>
+  <script src="js/page_refresh.js"></script>
 </head>
 
 <script>
@@ -477,6 +478,20 @@
         <button class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
+
+  <!-- Added screen refresh script-->]
+  <script>
+    const modal = document.getElementById('project-1-modal'); // your modal ID
+    const openBtn = document.getElementById('open-project-1');
+  
+    openBtn.addEventListener('click', function () {
+      modal.classList.add('is-active'); // or whatever opens your modal
+  
+      setTimeout(() => {
+        flkty.resize(); // allow modal to finish displaying first
+      }, 300); // tweak delay to match modal animation
+    });
+  </script>  
 
         <div id="project-1-modal-carousel" class="carousel">
           <figure class="image is-4by3 carousel-cell">
