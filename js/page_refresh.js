@@ -1,52 +1,48 @@
 let flkty;
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Initialize Flickity
-  const carouselElement = document.querySelector('#project-1-modal-carousel');
-  if (carouselElement) {
-    flkty = new Flickity(carouselElement, {
+  // Initialize Flickity only for the Snake Game carousel
+  const carousel = document.querySelector('#project-1-modal-carousel');
+  if (carousel) {
+    flkty = new Flickity(carousel, {
       cellAlign: 'center',
       contain: true,
       wrapAround: true
     });
 
-    // Resize Flickity after video metadata is loaded
-    const video = carouselElement.querySelector('video');
+    const video = carousel.querySelector('video');
     if (video) {
-      video.addEventListener('loadedmetadata', function () {
+      video.addEventListener('loadedmetadata', () => {
         flkty.resize();
       });
     }
   }
 
-  // Modal logic for Bulma
-  const modal = document.getElementById('project-1-modal');
-  const openBtn = document.getElementById('open-project-1');
-  const closeBtn = modal.querySelector('.delete');
-  const closeFooterBtn = modal.querySelector('.modal-card-foot .button');
+  // Set up modal triggers for all cards
+  const modalTriggers = document.querySelectorAll('.modal-trigger');
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const targetId = trigger.getAttribute('data-target');
+      const modal = document.getElementById(targetId);
+      if (modal) {
+        modal.classList.add('is-active');
 
-  if (openBtn && modal) {
-    openBtn.addEventListener('click', function () {
-      modal.classList.add('is-active');
-
-      // Trigger Flickity layout fix AFTER modal becomes visible
-      setTimeout(() => {
-        if (flkty) flkty.resize();
-      }, 100); // small delay for visibility
+        // Delay resize until modal is visible
+        setTimeout(() => {
+          if (flkty) flkty.resize();
+        }, 100);
+      }
     });
-  }
+  });
 
-  // Close modal with header button
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function () {
-      modal.classList.remove('is-active');
+  // Close all modals when "delete" or footer button is clicked
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    const closeButtons = modal.querySelectorAll('.delete, .modal-card-foot .button');
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      });
     });
-  }
-
-  // Close modal with footer button
-  if (closeFooterBtn) {
-    closeFooterBtn.addEventListener('click', function () {
-      modal.classList.remove('is-active');
-    });
-  }
+  });
 });
