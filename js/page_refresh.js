@@ -69,4 +69,19 @@ modals.forEach(modal => {
   });
 });
 
+
+// Close via background click
+const background = modal.querySelector('.modal-background');
+if (background) {
+  background.addEventListener('click', () => closeModal(modal));
+}
+});
+
+// Close on Esc key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal.is-active').forEach(modal => {
+      closeModal(modal);
+    });
+  }
 });
