@@ -42,12 +42,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Close modals on "delete" or footer button click
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.querySelectorAll('.delete, .modal-card-foot .button').forEach(button => {
-      button.addEventListener('click', () => {
-        modal.classList.remove('is-active');
-      });
+// Close all modals when "delete" or footer button is clicked
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+  const closeButtons = modal.querySelectorAll('.delete, .modal-card-foot .button');
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.remove('is-active');
+
+  // Pause all videos in this modal when it's closed
+  const videos = modal.querySelectorAll('video');
+    videos.forEach(video => {
+      video.pause();
+    video.currentTime = 0; // Optional: reset to beginning
     });
+   });
   });
+ });
 });
