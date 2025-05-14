@@ -42,62 +42,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Close modals on "delete" or footer button click
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.querySelectorAll('.delete, .modal-card-foot .button').forEach(button => {
-      button.addEventListener('click', () => {
-        modal.classList.remove('is-active');
+  // // Close modals on "delete" or footer button click
+  // document.querySelectorAll('.modal').forEach(modal => {
+  //   modal.querySelectorAll('.delete, .modal-card-foot .button').forEach(button => {
+  //     button.addEventListener('click', () => {
+  //       modal.classList.remove('is-active');
+  //     });
+  //   });
+  // });
+
+// Close all modals when "delete" or footer button is clicked
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+  const closeButtons = modal.querySelectorAll('.delete, .modal-card-foot .button');
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.remove('is-active');
+
+      // Pause all videos in this modal when it's closed
+      const videos = modal.querySelectorAll('video');
+      videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0; // Optional: reset to beginning
       });
     });
   });
 });
 
-
-// document.addEventListener('DOMContentLoaded', function () {
-//  const carousels = {};
-
-//   // Initialize Flickity project modals
-//   const carousel = document.querySelector('#project-1-modal-carousel');
-//   if (carousel) {
-//     flkty = new Flickity(carousel, {
-//       cellAlign: 'center',
-//       contain: true,
-//       wrapAround: true
-//     });
-
-//     const video = carousel.querySelector('video');
-//     if (video) {
-//       video.addEventListener('loadedmetadata', () => {
-//         flkty.resize();
-//       });
-//     }
-//   }
-
-//   // Set up modal triggers for all cards
-//   const modalTriggers = document.querySelectorAll('.modal-trigger');
-//   modalTriggers.forEach(trigger => {
-//     trigger.addEventListener('click', () => {
-//       const targetId = trigger.getAttribute('data-target');
-//       const modal = document.getElementById(targetId);
-//       if (modal) {
-//         modal.classList.add('is-active');
-
-//         // Delay resize until modal is visible
-//         setTimeout(() => {
-//           if (flkty) flkty.resize();
-//         }, 100);
-//       }
-//     });
-//   });
-
-//   // Close all modals when "delete" or footer button is clicked
-//   const modals = document.querySelectorAll('.modal');
-//   modals.forEach(modal => {
-//     const closeButtons = modal.querySelectorAll('.delete, .modal-card-foot .button');
-//     closeButtons.forEach(btn => {
-//       btn.addEventListener('click', () => {
-//         modal.classList.remove('is-active');
-//       });
-//     });
-//   });
-// });
+});
