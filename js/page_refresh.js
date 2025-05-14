@@ -69,5 +69,4 @@ modals.forEach(modal => {
   });
 });
 
-
 });
