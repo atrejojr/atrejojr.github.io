@@ -42,14 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // // Close modals on "delete" or footer button click
-  // document.querySelectorAll('.modal').forEach(modal => {
-  //   modal.querySelectorAll('.delete, .modal-card-foot .button').forEach(button => {
-  //     button.addEventListener('click', () => {
-  //       modal.classList.remove('is-active');
-  //     });
-  //   });
-  // });
+  // Close modals on "delete" or footer button click
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.querySelectorAll('.delete, .modal-card-foot .button').forEach(button => {
+      button.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+      });
+    });
+  });
 
 // Close all modals when "delete" or footer button is clicked
 const modals = document.querySelectorAll('.modal');
